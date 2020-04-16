@@ -8,9 +8,19 @@ const dataPath = path.join(path.dirname(process.mainModule.filename),
 
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset()); //-60
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,16);
 });
+
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
 
 function sortByProperty(property){  
     return function(a,b){  
@@ -33,7 +43,13 @@ const getItemsFromFile = (callBack) => {
 
 //Model
 module.exports = class Item {
-    constructor(itemDesc, itemResolveDate){
+    constructor(id, itemDesc, itemResolveDate){
+        
+        if(id===null){
+            this.id = create_UUID();
+        } else {
+            this.id = id;
+        }
         this.itemDesc = itemDesc;
         this.itemResolveDate = itemResolveDate;
         this.itemDateCreated = new Date().toDateInputValue();
@@ -41,7 +57,6 @@ module.exports = class Item {
 
     saveItem() {
         getItemsFromFile(items => {
-            
             items.push(this);
             items.sort(sortByProperty('itemResolveDate'));
             fs.writeFile(dataPath, JSON.stringify(items), (error) => {
@@ -49,9 +64,24 @@ module.exports = class Item {
             });
         });
        
-    }
+    };
+
+    removeItem() {
+        getItemsFromFile(items => {
+            items.forEach(item => {
+                if (item.id===this.id){
+                    items.splice(items.indexOf(item), 1);
+                }
+            });
+
+            fs.writeFile(dataPath, JSON.stringify(items), (error) => {
+                console.log(error);
+            });
+        });
+       
+    };
 
     static getItems(callBack){
         getItemsFromFile(callBack);
-    }
+    };
 }

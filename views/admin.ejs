@@ -8,21 +8,26 @@
             <div class="tile is-vertical is-parent">
             <% if(items.length > 0) { %>
                 <% for(let item of items) { %>
-                    <% if(timeNow>=item.itemResolveDate) { %>
+                    <% if(timeNowOffset>=item.itemResolveDate) { %>
                         <div class="tile is-child notification is-danger box">
                     <% } else { %>
                         <div class="tile is-child notification is-primary box">
                     <% } %>
                     
-                        <p class="title"><%= item.itemResolveDate.slice(0,10) %> <%= item.itemResolveDate.slice(11,16) %></p>
-                        <p><%= item.itemDesc %></p>
-                        <p>Created <%= item.itemDateCreated.slice(0,10) %> <%= item.itemDateCreated.slice(11,16) %></p>
-                        
+                    
+                        <p class="title is-size-4"><%= item.itemResolveDate.slice(0,10) %> <%= item.itemResolveDate.slice(11,16) %></p>
+                        <p class="is-size-5"><%= item.itemDesc %></p>
+                        <p class="title is-size-6">Created <%= item.itemDateCreated.slice(0,10) %> <%= item.itemDateCreated.slice(11,16) %></p>
+                        <div class="field">
+                            <div class="control">
+                              <a href="admin/remove/<%= item.id %>"><button class="button is-white">Mark as Resolved</button></a>
+                            </div>
+                        </div>
                       </div>
                 <% } %>
             <% } else { %>
                 <div class="tile is-child notification is-success box">
-                    <p class="title">All issues resolved :)</p>
+                    <p class="subtitle">All issues resolved :)</p>
                   </div>
           <% } %>
             </div>

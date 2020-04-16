@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.get('/', adminController.getAdminPage);
 
+router.get('/remove/:id', adminController.completeItem);
+
 module.exports = router;
