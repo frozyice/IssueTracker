@@ -12,7 +12,12 @@
             
             <% for(let item of items) { %>
             
-            <li><%= item.itemDesc %></li>
+            <li>
+                <% if(timeNow>=item.itemResolveDate) { %>
+                   Warning! 
+                   <% } %>
+               Resolve Deadline: <%= item.itemResolveDate %> | Description: <%= item.itemDesc %> | Date created: <%= item.itemDateCreated %>
+            </li>
 
             <% } %>
         </ul>

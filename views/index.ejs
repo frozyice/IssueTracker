@@ -6,20 +6,25 @@
 
     <div class="section">
         <form class="item-form" action="/" method="POST">
-            <div class="control">
-                <div class="field">
-                <label class="label">Describe the issue</label>
-                <div class="control">
-                  <input class="input is-primary" type="text" name="itemDesc" id="itemDesc">
-                </div>
-                <label class="label">Deadline to be resolved</label>
-                <div class="control">
-                  <input class="input is-primary" type="date" name="itemResolveDate" id="itemResolveDate">
-                </div>
-        </div>    
-            <div class="control">
+          <div class="field">
+              <label class="label">Issue Description</label>
+              <div class="control">
+                <input class="input is-primary" type="text" name="itemDesc" id="itemDesc">
+              </div>
+          </div>
+
+          <div class="field">
+              <label class="label">Deadline to be resolved</label>
+              <div class="control">
+                <input class="input is-primary" type="datetime-local" name="itemResolveDate" id="itemResolveDate" value=>
+              </div>
+          </div>
+
+          <div class="field">
+              <div class="control">
                 <button class="button is-primary" type="submit">Add Issue</button>
-            </div>
+              </div>
+          </div>
         </form>
     </div>
 <%- include('includes/end.ejs') %>
