@@ -4,26 +4,29 @@
 <body>
     <%- include('includes/navigation.ejs') %>
     <section class="section">
-        
+        <div class="tile is-ancestor" >
+            <div class="tile is-vertical is-parent">
+            <% if(items.length > 0) { %>
+                <% for(let item of items) { %>
+                    <% if(timeNow>=item.itemResolveDate) { %>
+                        <div class="tile is-child notification is-danger box">
+                    <% } else { %>
+                        <div class="tile is-child notification is-primary box">
+                    <% } %>
+                    
+                        <p class="title"><%= item.itemResolveDate.slice(0,10) %> <%= item.itemResolveDate.slice(11,16) %></p>
+                        <p><%= item.itemDesc %></p>
+                        <p>Created <%= item.itemDateCreated.slice(0,10) %> <%= item.itemDateCreated.slice(11,16) %></p>
+                        
+                      </div>
+                <% } %>
+            <% } else { %>
+                <div class="tile is-child notification is-success box">
+                    <p class="title">All issues resolved :)</p>
+                  </div>
+          <% } %>
+            </div>
+        </div>
 
-        <ul>
-        <% if(items.length > 0) { %>
-        
-            
-            <% for(let item of items) { %>
-            
-            <li>
-                <% if(timeNow>=item.itemResolveDate) { %>
-                   Warning! 
-                   <% } %>
-               Resolve Deadline: <%= item.itemResolveDate %> | Description: <%= item.itemDesc %> | Date created: <%= item.itemDateCreated %>
-            </li>
-
-            <% } %>
-        </ul>
-        
-        <% } else { %>
-            <h1>All issues resolved! :)</h1>
-        <% } %>
     </section>
 <%- include('includes/end.ejs') %>
