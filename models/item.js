@@ -6,12 +6,14 @@ const dataPath = path.join(path.dirname(process.mainModule.filename),
     'item.json'        
     );
 
+//https://stackoverflow.com/questions/6982692/how-to-set-input-type-dates-default-value-to-today
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,16);
 });
 
+//https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 function create_UUID(){
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
