@@ -1,0 +1,24 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <section class="section">
+        
+
+        <ul>
+        <% if(items.length > 0) { %>
+        
+            
+            <% for(let item of items) { %>
+            
+            <li><%= item.itemDesc %></li>
+
+            <% } %>
+        </ul>
+        
+        <% } else { %>
+            <h1>All issues resolved! :)</h1>
+        <% } %>
+    </section>
+<%- include('includes/end.ejs') %>
