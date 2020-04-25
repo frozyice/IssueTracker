@@ -14,7 +14,6 @@ app.set('views', 'views');
 app.use(userRoute);
 app.use('/admin', adminRoute);
 
-app.listen(port, function(){
+app.listen(process.env.PORT || port, function(){
     console.log("Server has started.");
 });
-

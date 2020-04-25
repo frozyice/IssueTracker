@@ -9,7 +9,7 @@
           <div class="field">
               <label class="label">Issue Description</label>
               <div class="control">
-                <textarea class="textarea is-primary" name="itemDesc" id="itemDesc"></textarea>
+                <textarea class="textarea is-primary" name="itemDesc" id="itemDesc" required></textarea>
                 
               </div>
           </div>
@@ -17,7 +17,7 @@
           <div class="field">
               <label class="label">Deadline to be resolved</label>
               <div class="control">
-                <input class="input is-primary" type="datetime-local" name="itemResolveDate" id="itemResolveDate" value="<%= timeNow %>">
+                <input class="input is-primary" type="datetime-local" name="itemResolveDate" id="itemResolveDate" value="<%= timeNow %>" required> 
               </div>
           </div>
 
